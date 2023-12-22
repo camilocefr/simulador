@@ -1,0 +1,231 @@
+&lt;!DOCTYPE html&gt;&lt;html lang=&quot;es&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;meta
+name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Calculadora Hipotecaria&lt;/title&gt;
+    &lt;script&gt;
+// Función para mostrar opciones de prima según la categoría
+seleccionada
+function mostrarPrimas() {
+var categoria = document.getElementById(&quot;categoria&quot;).value;
+var primaOptions = document.getElementById(&quot;primaOptions&quot;);
+// Reinicia las opciones de prima
+primaOptions.innerHTML = &quot;&quot;;
+// Define las opciones según la categoría seleccionada
+switch (categoria) {
+case &quot;b&quot;:
+agregarOpciones([&quot;PRIACTMIL&quot;, &quot;PRI ACT CIVIL&quot;, &quot;JINETA&quot;,
+&quot;PRI ANTIGU&quot;, &quot;PRI DECRETO 2863&quot;, &quot;PRIMAS&quot;, &quot;BONIFJUD&quot;, &quot;PRIOFISER&quot;,
+&quot;PRIDIR&quot;, &quot;PRIALTOMAN&quot;, &quot;PRIMGENALM&quot;]);
+break;
+case &quot;c&quot;:
+
+agregarOpciones([&quot;PRESPE&quot;, &quot;SUBALIM&quot;, &quot;SUBFAMI&quot;,
+&quot;P.NIV.EJE&quot;, &quot;P.RET.EXP&quot;, &quot;PRI.ANTIGU&quot;, &quot;SUBSIDIO FAMILIA NIVEL E&quot;,
+&quot;PRICUERPOADMON&quot;]);
+break;
+case &quot;d&quot;:
+agregarOpciones([&quot;P.RET.EXP&quot;, &quot;PRIACTMIL&quot;, &quot;PRI.ANTIGU&quot;,
+&quot;AUX TRANSPORTE&quot;, &quot;PRESMA&quot;, &quot;BONORDPUB&quot;, &quot;PRICUERPOADMON&quot;]);
+break;
+}
+}
+// Función para agregar opciones como casillas de verificación
+function agregarOpciones(opciones) {
+var primaOptions = document.getElementById(&quot;primaOptions&quot;);
+for (var i = 0; i &lt; opciones.length; i++) {
+var checkbox = document.createElement(&quot;input&quot;);
+checkbox.type = &quot;checkbox&quot;;
+checkbox.name = &quot;prima&quot;;
+checkbox.value = opciones[i];
+var label = document.createElement(&quot;label&quot;);
+label.appendChild(checkbox);
+label.appendChild(document.createTextNode(opciones[i]));
+primaOptions.appendChild(label);
+primaOptions.appendChild(document.createElement(&quot;br&quot;));
+}
+}
+// Función para aplicar el formato de separador de miles al escribir
+o modificar el contenido
+function formatoNumerico(input) {
+// Convierte el valor a formato numérico con separador de miles
+var valorFormateado = input.value.replace(/[^\d]/g,
+&#39;&#39;).replace(/\B(?=(\d{3})+(?!\d))/g, &quot;,&quot;);
+// Actualiza el valor en el campo
+input.value = valorFormateado;
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;Calculadora Hipotecaria Caja Honor&amp;nbsp;&lt;/h1&gt;&lt;form&gt;&lt;!-- Campos 1-4
+--&gt;&lt;label for=&quot;nombre&quot;&gt;Nombre:&lt;/label&gt; &lt;input id=&quot;nombre&quot; name=&quot;nombre&quot;
+type=&quot;text&quot;&gt;&lt;br&gt;
+
+&lt;label for=&quot;identificacion&quot;&gt;Número de identificación:&lt;/label&gt; &lt;input
+id=&quot;identificacion&quot; name=&quot;identificacion&quot; type=&quot;number&quot;&gt;&lt;br&gt;
+&lt;label for=&quot;celular&quot;&gt;Número de celular:&lt;/label&gt; &lt;input id=&quot;celular&quot;
+name=&quot;celular&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;label for=&quot;email&quot;&gt;Correo electrónico:&lt;/label&gt; &lt;input id=&quot;email&quot;
+name=&quot;email&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;!-- Campos 5-6 --&gt; &lt;label for=&quot;fuerza&quot;&gt;Fuerza:&lt;/label&gt; &lt;select id=&quot;fuerza&quot;
+name=&quot;fuerza&quot;&gt;&lt;option value=&quot;a&quot;&gt;Seleccione su opción&lt;/option&gt;&lt;option
+value=&quot;b&quot;&gt;Policía Nacional&lt;/option&gt;&lt;option value=&quot;c&quot;&gt;Armada
+Nacional&lt;/option&gt;&lt;option value=&quot;d&quot;&gt;Fuerza Aeroespacial&lt;/option&gt;&lt;option
+value=&quot;e&quot;&gt;Ejército Nacional&lt;/option&gt; &lt;/select&gt;&lt;br&gt;
+&lt;label for=&quot;categoria&quot;&gt;Categoría:&lt;/label&gt; &lt;select id=&quot;categoria&quot;
+name=&quot;categoria&quot; onchange=&quot;mostrarPrimas()&quot;&gt;&lt;option value=&quot;a&quot;&gt;Seleccione su
+opción&lt;/option&gt;&lt;option value=&quot;b&quot;&gt;Oficial&lt;/option&gt;&lt;option
+value=&quot;c&quot;&gt;Suboficial, nivel ejecutivo&lt;/option&gt;&lt;option value=&quot;d&quot;&gt;Soldado
+profesional, infante de marina profesional, agente&lt;/option&gt; &lt;/select&gt;&lt;br&gt;
+&lt;label for=&quot;salario&quot;&gt;Salario mensual (sin descuentos):&lt;/label&gt; &lt;input
+id=&quot;salario&quot; name=&quot;salario&quot; oninput=&quot;formatoNumerico(this)&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;!-- Campo 8 (respuestas múltiples como casillas de verificación) --&gt;
+&lt;label&gt;Prima en su desprendible de nómina:&lt;/label&gt;
+&lt;div id=&quot;primaOptions&quot;&gt;&lt;/div&gt;
+&lt;!-- Campo 9 --&gt;&lt;br&gt;
+&lt;label for=&quot;descuentos&quot;&gt;Indique el valor total de los descuentos por
+desprendible de nómina:&lt;/label&gt; &lt;input id=&quot;descuentos&quot; name=&quot;descuentos&quot;
+oninput=&quot;formatoNumerico(this)&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;!-- Campo 10 (respuestas múltiples) --&gt;&lt;br&gt;
+&lt;label for=&quot;obligaciones&quot;&gt;¿Qué obligaciones vigentes tiene en el sector
+financiero?&lt;/label&gt;&lt;br&gt;
+&lt;small&gt;Nota: cualquier tipo de crédito vigente con entidades financieras no
+se verá reflejado en su desprendible de nómina.&lt;/small&gt;&lt;br&gt;
+&lt;input id=&quot;creditoVivienda&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot;
+value=&quot;Crédito de vivienda&quot;&gt; &lt;label for=&quot;creditoVivienda&quot;&gt;Crédito de
+vivienda&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;creditoVehicular&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot;
+value=&quot;Crédito vehicular&quot;&gt; &lt;label for=&quot;creditoVehicular&quot;&gt;Crédito
+vehicular&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;tarjetasCredito&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot;
+value=&quot;Tarjetas de crédito&quot;&gt; &lt;label for=&quot;tarjetasCredito&quot;&gt;Tarjetas de
+crédito&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;creditoEducativo&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot;
+value=&quot;Crédito educativo&quot;&gt; &lt;label for=&quot;creditoEducativo&quot;&gt;Crédito
+educativo&lt;/label&gt;&lt;br&gt;
+
+&lt;input id=&quot;codeudorCredito&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot;
+value=&quot;Codeudor Crédito&quot;&gt; &lt;label for=&quot;codeudorCredito&quot;&gt;Codeudor
+Crédito&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;otrosCreditos&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot; value=&quot;Otros
+Créditos&quot;&gt; &lt;label for=&quot;otrosCreditos&quot;&gt;Otros Créditos&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;ninguno&quot; name=&quot;obligaciones&quot; type=&quot;checkbox&quot; value=&quot;Ninguno&quot;&gt;
+&lt;label for=&quot;ninguno&quot;&gt;Ninguno&lt;/label&gt; &lt;!-- Agrega cualquier script adicional
+aquí --&gt;&lt;/form&gt;&lt;form&gt;&lt;!-- Campos 1-4 --&gt;&lt;!-- ... (tu formulario existente)
+... --&gt;&lt;!-- Campo 11 --&gt;&lt;br&gt;
+&lt;label for=&quot;valorObligacionesFinancieras&quot;&gt;Especifique el valor mensual que
+suman sus obligaciones a pagar en el sector financiero:&lt;/label&gt; &lt;input
+id=&quot;valorObligacionesFinancieras&quot; name=&quot;valorObligacionesFinancieras&quot;
+oninput=&quot;formatoNumerico(this)&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;!-- Campo 12 --&gt; &lt;label for=&quot;checkBoxObligaciones&quot;&gt;¿Tiene obligaciones en
+el sector real?&lt;/label&gt; &lt;small&gt;Nota: pagos que realiza y no se ven
+reflejados en el desprendible de nómina&lt;/small&gt;&lt;br&gt;
+&lt;input id=&quot;celularPospago&quot; name=&quot;obligacionesReal&quot; type=&quot;checkbox&quot;
+value=&quot;Plan celular pospago&quot;&gt; Plan celular pospago&lt;br&gt;
+&lt;input id=&quot;servicioHogar&quot; name=&quot;obligacionesReal&quot; type=&quot;checkbox&quot;
+value=&quot;Servicio Hogar&quot;&gt; Servicio Hogar (telefonía, internet, televisión)&lt;br&gt;
+&lt;input id=&quot;creditoTerceros&quot; name=&quot;obligacionesReal&quot; type=&quot;checkbox&quot;
+value=&quot;Crédito de terceros a nombre propio&quot;&gt; Crédito de terceros a nombre
+propio&lt;br&gt;
+&lt;input id=&quot;otrasObligaciones&quot; name=&quot;obligacionesReal&quot; type=&quot;checkbox&quot;
+value=&quot;Otras obligaciones&quot;&gt; Otras obligaciones&lt;br&gt;
+&lt;input id=&quot;ningunaObligacion&quot; name=&quot;obligacionesReal&quot; type=&quot;checkbox&quot;
+value=&quot;Ninguna&quot;&gt; Ninguna&lt;br&gt;
+&lt;br&gt;
+&lt;!-- Campo 13 --&gt; &lt;label for=&quot;valorObligacionesReal&quot;&gt;Especifique el valor
+mensual que suman sus obligaciones a pagar en el sector real:&lt;/label&gt; &lt;input
+id=&quot;valorObligacionesReal&quot; name=&quot;valorObligacionesReal&quot;
+oninput=&quot;formatoNumerico(this)&quot; type=&quot;text&quot;&gt;&lt;br&gt;
+&lt;br&gt;
+&amp;nbsp;&lt;/form&gt;&lt;script&gt;
+function simularCredito() {
+// Obtener los valores de los campos
+var nombre = document.getElementById(&quot;nombre&quot;).value;
+var identificacion = document.getElementById(&quot;identificacion&quot;).value;
+var celular = document.getElementById(&quot;celular&quot;).value;
+var email = document.getElementById(&quot;email&quot;).value;
+var fuerza = document.getElementById(&quot;fuerza&quot;).value;
+var categoria = document.getElementById(&quot;categoria&quot;).value;
+
+var salario =
+parseFloat(document.getElementById(&quot;salario&quot;).value.replace(/,/g, &quot;&quot;));
+var descuentos =
+parseFloat(document.getElementById(&quot;descuentos&quot;).value.replace(/,/g, &quot;&quot;));
+var valorObligacionesFinancieras =
+parseFloat(document.getElementById(&quot;valorObligacionesFinancieras&quot;).value.rep
+lace(/,/g, &quot;&quot;));
+var valorObligacionesReal =
+parseFloat(document.getElementById(&quot;valorObligacionesReal&quot;).value.replace(/,
+/g, &quot;&quot;));
+// Validar que todos los campos estén diligenciados
+if (
+nombre === &quot;&quot; ||
+identificacion === &quot;&quot; ||
+celular === &quot;&quot; ||
+email === &quot;&quot; ||
+fuerza === &quot;a&quot; ||
+categoria === &quot;a&quot; ||
+isNaN(salario) ||
+isNaN(descuentos) ||
+isNaN(valorObligacionesFinancieras) ||
+isNaN(valorObligacionesReal)
+) {
+alert(&quot;Por favor, complete todos los campos del formulario.&quot;);
+return;
+}
+// Realizar los cálculos
+var capacidadEndeudamiento = (salario / 2) - descuentos -
+valorObligacionesFinancieras - valorObligacionesReal;
+// Crear un elemento para mostrar el resultado
+var resultadoElement = document.createElement(&quot;div&quot;);
+resultadoElement.style.color = &quot;red&quot;; // Establecer color rojo
+resultadoElement.style.fontSize = &quot;larger&quot;; // Establecer tamaño de
+letra más grande
+resultadoElement.textContent = &quot;Capacidad de endeudamiento: $&quot; +
+capacidadEndeudamiento.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, &quot;,&quot;);
+// Mostrar mensaje según la capacidad de endeudamiento
+var mensaje = document.createElement(&quot;div&quot;);
+mensaje.style.fontSize = &quot;larger&quot;;
+if (capacidadEndeudamiento &lt; 500000) {
+
+mensaje.textContent = &quot;Lo invitamos a mejorar su perfil financiero
+para acceder a las líneas de crédito de Caja Honor.&quot;;
+} else {
+mensaje.textContent = &quot;¡Felicidades! Usted tiene un excelente
+potencial financiero.&quot;;
+mensaje.style.color = &quot;green&quot;; // Puedes ajustar el estilo según tus
+preferencias
+}
+// Limpiar el formulario
+document.getElementById(&quot;formulario&quot;).reset();
+// Eliminar resultados anteriores si existen
+var resultadosAnteriores =
+document.getElementById(&quot;resultadosAnteriores&quot;);
+if (resultadosAnteriores) {
+resultadosAnteriores.remove();
+}
+// Crear un contenedor para los resultados anteriores
+var contenedorResultadosAnteriores = document.createElement(&quot;div&quot;);
+contenedorResultadosAnteriores.id = &quot;resultadosAnteriores&quot;;
+// Agregar el elemento al contenedor
+contenedorResultadosAnteriores.appendChild(resultadoElement);
+contenedorResultadosAnteriores.appendChild(mensaje);
+// Agregar el contenedor al final del cuerpo del documento
+document.body.appendChild(contenedorResultadosAnteriores);
+}
+&lt;/script&gt;&lt;form id=&quot;formulario&quot;&gt;&lt;!-- ... (tu formulario existente) ... --
+&gt;&lt;/form&gt;&lt;button onclick=&quot;simularCredito()&quot; type=&quot;button&quot;&gt;Simular
+crédito&lt;/button&gt;&lt;div class=&quot;ms_crm_trackingscript_base&quot;&gt;
+&lt;div id=&quot;dzSpa4dP17qDPYkNbxlawixOA-M5u8pOsRsi01SxQ--0&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;https://mktdplp102cdn.azureedge.net/public/latest/js/ws-
+tracking.js?v=1.84.2007&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;d365-mkt-config&quot; data-
+hostname=&quot;76852cceba8a4fe285c7be31793e7b20.svc.dynamics.com&quot; data-website-
+id=&quot;zSpa4dP17qDPYkNbxlawixOA-M5u8pOsRsi01SxQ--0&quot; style=&quot;display:none&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&quot;ms_crm_trackingscript_base&quot;&gt;
+&lt;div id=&quot;dzSpa4dP17qDPYkNbxlawixOA-M5u8pOsRsi01SxQ--0&quot;&gt;&lt;/div&gt;&lt;script
+src=&quot;https://mktdplp102cdn.azureedge.net/public/latest/js/ws-
+tracking.js?v=1.84.2007&quot;&gt;&lt;/script&gt;&lt;div class=&quot;d365-mkt-config&quot;
+style=&quot;display:none&quot; data-website-id=&quot;zSpa4dP17qDPYkNbxlawixOA-
+
+M5u8pOsRsi01SxQ--0&quot; data-
+hostname=&quot;76852cceba8a4fe285c7be31793e7b20.svc.dynamics.com&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
